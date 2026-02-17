@@ -1,0 +1,41 @@
+# --- 1. Python & System Junk ---
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+Thumbs.db
+
+# --- 2. Virtual Environments & IDEs ---
+.venv/
+venv/
+env/
+.vscode/
+.idea/
+
+# --- 3. Large Datasets (CRITICAL) ---
+dataset_final_piece/
+dataset_ready_for_yolo/
+images/
+labels/
+
+# These are cache files created by YOLO
+*.cache
+
+# --- 4. Training Logs & Artifacts ---
+runs/
+
+# --- 5. User Uploads & Temporary Files ---
+uploads/
+temp_*
+*.log
+
+# --- 6. Optional: Specific large files if any ---
+*.zip
+*.tar.gz
+
+# --- 7. helper files I made ---
+printer_file.py
+val.py
+
+# Ignore base pretrained models (they are auto-downloaded)
+yolov8n*.pt

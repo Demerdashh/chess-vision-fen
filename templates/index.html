@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>Demerdash Chess Reader</title>
+
+    <style>
+        body {
+
+        /* The URL to your image */
+        background-image: url('/static/Gemini_Generated_Image_ucryiucryiucryiu.png');
+
+        /* Scales the image to cover the entire container */
+        background-size: cover; 
+        
+        /* Centers the image */
+        background-position: center; 
+        
+        /* Prevents the image from repeating */
+        background-repeat: no-repeat; 
+        
+        /* Optional: Keeps the background fixed while you scroll */
+        background-attachment: fixed; 
+
+        min-height: 100vh;
+        }
+
+        .upload-box.dragover {
+            border-color: #2563eb;
+            background-color: #e8f1ff;
+        }
+    </style>
+</head>
+
+<body class="relative">
+
+    <!-- TOP TITLE WITH LOGO -->
+    <div class="absolute top-6 left-6 flex items-center gap-3 bg-white shadow-md px-5 py-3 rounded-xl">
+        <img src="/static/logo.jpg" alt="Logo" class="w-10 h-10">  
+        <span class="text-lg font-semibold text-blue-700">Demerdash Chess Reader</span>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="flex justify-center items-center w-full min-h-screen">
+
+        <div class="bg-white shadow-xl rounded-2xl p-10 w-full max-w-xl">
+
+            <h1 class="text-2xl font-bold mb-6 text-gray-800 text-center">Upload file</h1>
+
+            <form id="upload-form"
+                  action="/process"
+                  method="post"
+                  enctype="multipart/form-data"
+                  class="flex flex-col justify-center items-center">
+
+                <!-- DRAG & DROP AREA -->
+                <div id="drop-zone"
+                     class="upload-box border-2 border-dashed border-gray-300 rounded-xl 
+                            w-full h-56 flex flex-col justify-center items-center 
+                            cursor-pointer transition">
+
+                    <svg id="upload-icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-12 w-12 text-blue-400 mb-3"
+                        fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M3 15a4 4 0 01.88-2.59L12 3l8.12 9.41A4 4 0 0121 15v1a4 4 0 01-4 4H7a4 4 0 01-4-4v-1z" />
+                    </svg>
+
+                    <p id="upload-text" class="text-gray-500 text-lg">
+                        Drag & Drop your file or <span class="text-blue-600 underline">Browse</span>
+                    </p>
+
+                    <input type="file" name="file" id="file-input" class="hidden">
+                </div>
+
+                <p class="mt-4 text-gray-500 text-sm">
+                    Supported: PNG, JPG 
+                </p>
+
+                <!-- BUTTON -->
+                <button id="submit-btn"
+                        type="submit"
+                        class="mt-6 w-full bg-blue-600 text-white font-semibold py-3 
+                               rounded-xl hover:bg-blue-700 transition">
+                    Upload
+                </button>
+
+            </form>
+        </div>
+    </div>
+
+
+    <!-- DRAG & DROP + UI LOGIC -->
+    <script>
+        const dropZone = document.getElementById("drop-zone");
+        const fileInput = document.getElementById("file-input");
+        const uploadText = document.getElementById("upload-text");
+        const uploadIcon = document.getElementById("upload-icon");
+        const submitBtn = document.getElementById("submit-btn");
+
+        // CLICK opens file selector
+        dropZone.addEventListener("click", () => fileInput.click());
+
+        // HANDLE DRAG EVENTS
+        dropZone.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            dropZone.classList.add("dragover");
+        });
+
+        dropZone.addEventListener("dragleave", () => {
+            dropZone.classList.remove("dragover");
+        });
+
+        dropZone.addEventListener("drop", (e) => {
+            e.preventDefault();
+            dropZone.classList.remove("dragover");
+
+            const file = e.dataTransfer.files[0];
+            if (file) {
+                fileInput.files = e.dataTransfer.files;
+                handleFileSelected();
+            }
+        });
+
+        // NORMAL SELECTION
+        fileInput.addEventListener("change", handleFileSelected);
+
+        function handleFileSelected() {
+            uploadText.textContent = "File uploaded!";
+            uploadText.classList.remove("text-gray-500");
+            uploadText.classList.add("text-green-600", "font-semibold");
+
+            uploadIcon.classList.add("text-green-500");
+
+            submitBtn.textContent = "Generate FEN Code";
+            submitBtn.classList.remove("bg-blue-600");
+            submitBtn.classList.add("bg-green-600", "hover:bg-green-700");
+        }
+    </script>
+
+</body>
+</html>
