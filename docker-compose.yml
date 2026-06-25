@@ -1,0 +1,27 @@
+services:
+  chess-vision:
+    # Build the image from the Dockerfile in this directory.
+    # `docker compose up --build` triggers a rebuild if anything changed.
+    build: .
+    image: chess-vision:latest
+    container_name: chess-vision-api
+
+    ports:
+      # host_port:container_port
+      # Access the API at http://localhost:8000
+      - "8000:8000"
+
+    # Restart policy for production-like resilience.
+    # "unless-stopped" → restarts automatically after crashes or reboots,
+    # but stays stopped if you manually run `docker compose down`.
+    restart: unless-stopped
+
+    # Health check: Docker pings this endpoint every 30s.
+    # If it fails 3 times in a row, the container is marked "unhealthy".
+    # FastAPI exposes /docs by default — a reliable liveness signal.
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s   # Grace period for model loading on startup

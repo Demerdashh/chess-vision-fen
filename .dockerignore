@@ -1,0 +1,39 @@
+# Git
+.git
+.gitignore
+
+# IDEs
+.vscode/
+.idea/
+
+# Python & Virtual Environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Large Datasets & YOLO Artifacts
+dataset_final_piece/
+dataset_ready_for_yolo/
+images/
+labels/
+*.cache
+runs/
+yolov8n*.pt
+
+# Local Helpers (Not needed for FastAPI runtime)
+printer_file.py
+val.py
+train*.py
+dataset_tools/
+
+# User Uploads, Logs & Temp
+uploads/
+temp_*
+*.log
+
+# Docker & Env
+Dockerfile
+.dockerignore
+.env

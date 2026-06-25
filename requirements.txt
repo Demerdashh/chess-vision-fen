@@ -1,5 +1,16 @@
+# ── Web Framework ──────────────────────────────────────────────────────────────
 fastapi==0.129.0
-numpy==2.4.2
-opencv_contrib_python==4.12.0.88
-opencv_python==4.12.0.88
+uvicorn==0.34.3          # ASGI server — required to run FastAPI (was missing!)
+python-multipart==0.0.20 # Required for FastAPI file upload endpoints (UploadFile)
+
+# ── Computer Vision & AI ───────────────────────────────────────────────────────
+# opencv-contrib-python already contains everything in opencv-python.
+# Installing BOTH causes pip to overwrite cv2.so with the second install,
+# which can silently break contrib modules. Use only contrib.
+opencv-contrib-python==4.12.0.88
 ultralytics==8.3.221
+
+# ── Numerics ───────────────────────────────────────────────────────────────────
+# numpy unpinned: lets pip pick the version compatible with everything above.
+# opencv 4.12 and ultralytics 8.3 both work fine with numpy 1.x and 2.x.
+numpy
