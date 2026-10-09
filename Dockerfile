@@ -41,7 +41,7 @@ RUN pip install --no-cache-dir \
 
 # ── Install Remaining Dependencies ────────────────────────────────────────────
 # torch is already satisfied (CPU). pip skips it and installs everything else:
-# fastapi, uvicorn, opencv-contrib-python, ultralytics, numpy, python-multipart
+# fastapi, uvicorn, opencv-python, ultralytics, numpy, python-multipart
 RUN pip install --no-cache-dir -r requirements.txt
 
 # ── Copy Application Files ─────────────────────────────────────────────────────
@@ -52,7 +52,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app/       ./app/
 COPY models/    ./models/
 COPY templates/ ./templates/
-COPY main.py    . 
+COPY main.py    .
 EXPOSE 8000
 
 # app.apmain:app  →  file: app/apmain.py,  FastAPI instance variable: app

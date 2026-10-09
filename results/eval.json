@@ -1,0 +1,9 @@
+{
+  "test_set": "150 synthetic boards",
+  "n": 150,
+  "exact": 149,
+  "exact_fen_pct": 99.33333333333333,
+  "per_square_pct": 99.98958333333333,
+  "median_ms": 50.89200000020355,
+  "device": "CPU"
+}

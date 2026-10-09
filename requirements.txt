@@ -4,10 +4,9 @@ uvicorn==0.34.3          # ASGI server — required to run FastAPI (was missing!
 python-multipart==0.0.20 # Required for FastAPI file upload endpoints (UploadFile)
 
 # ── Computer Vision & AI ───────────────────────────────────────────────────────
-# opencv-contrib-python already contains everything in opencv-python.
-# Installing BOTH causes pip to overwrite cv2.so with the second install,
-# which can silently break contrib modules. Use only contrib.
-opencv-contrib-python==4.12.0.88
+# Use exactly ONE OpenCV package. ultralytics already depends on opencv-python,
+# and installing opencv-contrib-python next to it corrupts the cv2 module.
+opencv-python==4.12.0.88
 ultralytics==8.3.221
 
 # ── Numerics ───────────────────────────────────────────────────────────────────
